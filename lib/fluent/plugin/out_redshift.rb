@@ -222,10 +222,10 @@ class RedshiftOutput < BufferedOutput
                            end
   end
 
-  def json_to_hash(json_text)
-    return nil if json_text.to_s.empty?
+  def json_to_hash(json_val)
+    return nil if json_val.to_s.empty?
 
-    JSON.parse(json_text)
+    json_val.kind_of?(Hash) ? json_val : JSON.parse(json_val)
   rescue => e
     $log.warn format_log("failed to parse json. "), :error => e.to_s
   end
